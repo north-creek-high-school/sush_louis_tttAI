@@ -5,7 +5,7 @@ import javax.swing.*;
  * @since 2019-9-24
  * Period 3 Adv Programming Topics
  * <p>
- * This class is intended to provide the majority of the functionality for the tictactoe board.
+ * This class is intended to provide the majority of the functionality for the TicTacToe board.
  * It handles the logical aspects of the game.
  */
 

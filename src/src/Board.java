@@ -11,6 +11,16 @@ class Board {
 
     Board() {
         drawLines();
+        panel.onClick(this::onClick);
+
+    }
+
+    private void onClick(int x, int y) {
+        decidePlace(x, y);
+    }
+
+    private void decidePlace(int x, int y) {
+
     }
 
     /**

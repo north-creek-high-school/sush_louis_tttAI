@@ -9,18 +9,53 @@ class Board {
     //Creates the graphics object
     private Graphics g = panel.getGraphics();
 
+    /**
+     * Constructor called when a new Board object is created.
+     * It has the onClick handler on it, and draws the lines on the grid.
+     */
     Board() {
         drawLines();
         panel.onClick(this::onClick);
 
     }
 
+    /**
+     * Called whenever the user clicks on the panel.
+     * @param x X value of user click
+     * @param y Y value of user click
+     */
     private void onClick(int x, int y) {
         decidePlace(x, y);
     }
 
+    /**
+     * Decides where to place the X or the O.
+     * @param x X value of user click
+     * @param y Y value of user click
+     */
     private void decidePlace(int x, int y) {
+        //Checks if the box is empty before placing. If it is not empty, it is not placed.
+        if (occupyStatus[x / 200][y / 200] == 0) {
+        } else {
+            //turnNumber--;
+        }
+    }
 
+    /**
+     *
+     * @param x X value of where to draw object
+     * @param y Y value of where to draw object
+     * @param turnNumber Integer representing X or O's turn
+     */
+    private void drawObject(int x, int y, int turnNumber) {
+        g.setFont(new Font("Monospace", Font.PLAIN, 200));
+        if (turnNumber % 2 == 0) {
+            g.drawString("X", x + 25, y - 10);
+            occupyStatus[x / 200][y / 200] = 1;
+        } else {
+            g.drawString("O", x + 25, y - 10);
+            occupyStatus[x / 200][y / 200] = 2;
+        }
     }
 
     /**

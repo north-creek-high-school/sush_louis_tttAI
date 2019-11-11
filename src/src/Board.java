@@ -1,13 +1,14 @@
 import java.awt.*;
 
 class Board {
-
+    //TODO: Some bug with number of X/O's you can place.
     //Creates a array that stores if the point on the grid is occupied or not
     private int[][] occupyStatus = new int[3][3];
     //Creates a panel that is 600 pixels by 600 pixels
     private DrawingPanel panel = new DrawingPanel(600, 600);
     //Creates the graphics object
     private Graphics g = panel.getGraphics();
+    private int turnNumber;
 
     /**
      * Constructor called when a new Board object is created.
@@ -25,6 +26,7 @@ class Board {
      * @param y Y value of user click
      */
     private void onClick(int x, int y) {
+        System.out.println(x + ", " + y);
         decidePlace(x, y);
     }
 
@@ -36,9 +38,10 @@ class Board {
     private void decidePlace(int x, int y) {
         //Checks if the box is empty before placing. If it is not empty, it is not placed.
         if (occupyStatus[x / 200][y / 200] == 0) {
-        } else {
-            //turnNumber--;
+            drawObject((x/200) * 200, ((y/200) * 200) + 200, turnNumber);
+            turnNumber++;
         }
+
     }
 
     /**

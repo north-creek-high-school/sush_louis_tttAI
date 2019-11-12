@@ -1,7 +1,7 @@
 import java.awt.*;
 
 class Board {
-    //TODO: Some bug with number of X/O's you can place.
+
     //Creates a array that stores if the point on the grid is occupied or not
     private int[][] occupyStatus = new int[3][3];
     //Creates a panel that is 600 pixels by 600 pixels
@@ -39,9 +39,18 @@ class Board {
         //Checks if the box is empty before placing. If it is not empty, it is not placed.
         if (occupyStatus[x / 200][y / 200] == 0) {
             drawObject((x/200)*200, ((y/200) * 200) + 200, turnNumber);
+            updateArray(x, y, turnNumber);
             turnNumber++;
         }
 
+    }
+
+    private void updateArray(int x, int y, int turnNumber) {
+        if(turnNumber % 2 == 0) {
+            occupyStatus[x/200][y/200] = 2;
+        } else {
+            occupyStatus[x/200][y/200] = 1;
+        }
     }
 
     /**
@@ -67,6 +76,10 @@ class Board {
         g.drawLine(400, 0, 400, 600);
         g.drawLine(0, 200, 600, 200);
         g.drawLine(0, 400, 600, 400);
+    }
+
+    public int[][] getBoardStatus() {
+        return this.occupyStatus;
     }
 
 }

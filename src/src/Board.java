@@ -26,7 +26,6 @@ class Board {
      * @param y Y value of user click
      */
     private void onClick(int x, int y) {
-        System.out.println(x + ", " + y);
         decidePlace(x, y);
     }
 
@@ -36,9 +35,10 @@ class Board {
      * @param y Y value of user click
      */
     private void decidePlace(int x, int y) {
+        System.out.println(x + ", " + y);
         //Checks if the box is empty before placing. If it is not empty, it is not placed.
         if (occupyStatus[x / 200][y / 200] == 0) {
-            drawObject((x/200) * 200, ((y/200) * 200) + 200, turnNumber);
+            drawObject((x/200)*200, ((y/200) * 200) + 200, turnNumber);
             turnNumber++;
         }
 
@@ -54,10 +54,8 @@ class Board {
         g.setFont(new Font("Monospace", Font.PLAIN, 200));
         if (turnNumber % 2 == 0) {
             g.drawString("X", x + 25, y - 10);
-            occupyStatus[x / 200][y / 200] = 1;
         } else {
             g.drawString("O", x + 25, y - 10);
-            occupyStatus[x / 200][y / 200] = 2;
         }
     }
 

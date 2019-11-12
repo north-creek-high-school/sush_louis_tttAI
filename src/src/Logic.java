@@ -4,5 +4,10 @@ public class Logic {
 
     public static void main(String[] args) {
         board = new Board();
+        Logic logic = new Logic();
     }
+
+    Logic() {
+    }
+
 }

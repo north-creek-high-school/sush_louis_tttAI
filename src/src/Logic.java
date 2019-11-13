@@ -94,8 +94,11 @@ public class Logic {
             System.exit(0);
         } else {
             //Reset the game here
-
+            resetGame();
         }
+    }
+
+    private void resetGame() {
     }
 
 }

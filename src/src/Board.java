@@ -1,4 +1,5 @@
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Font;
 
 class Board {
 
@@ -12,16 +13,14 @@ class Board {
 
     /**
      * Constructor called when a new Board object is created.
-     * It has the onClick handler on it, and draws the lines on the grid.
+     * Calls the drawLines method, so that the lines are drawn.
      */
     Board() {
         drawLines();
     }
 
     void updateArray(int x, int y) {
-        System.out.println("In updateArray");
         if(boardStatus[x/200][y/200] == 0) {
-            System.out.println("In if 0");
             if (turnNumber % 2 == 0) {
                 boardStatus[x / 200][y / 200] = 2;
                 drawObject((x/200)*200, ((y/200) * 200) + 200);
@@ -59,6 +58,10 @@ class Board {
 
     DrawingPanel getPanel() {
         return this.panel;
+    }
+
+    int[][] getBoardStatus() {
+        return this.boardStatus;
     }
 
 }

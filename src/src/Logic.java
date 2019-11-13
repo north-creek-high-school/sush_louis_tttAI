@@ -26,26 +26,44 @@ public class Logic {
      * */
     private void checkWin() {
         int[][] status = board.getBoardStatus();
-        //Checks for horizontal winning scenarios.
-        for (int[] ints : status) {
-            if (ints[0] != 0 && ints[0] == ints[1] && ints[2] == ints[1]) {
-                announceWinner(ints[0]);
+            //Checks for horizontal winning scenarios.
+            for (int[] ints : status) {
+                if (ints[0] != 0 && ints[0] == ints[1] && ints[2] == ints[1]) {
+                    announceWinner(ints[0]);
+                    return;
+                }
+            }
+            //Checks for vertical winning scenarios.
+            for (int col = 0; col < status.length; col++) {
+                if (status[0][col] != 0 && status[0][col] == status[1][col] && status[1][col] == status[2][col]) {
+                    announceWinner(status[0][col]);
+                    return;
+                }
+            }
+            //Checks for diagonal winning scenarios.
+            if (status[0][0] != 0 && status[1][1] == status[2][2] && status[2][2] == status[0][0]) {
+                announceWinner(status[1][1]);
+                return;
+            }
+            //Checks for another diagonal winning scenario.
+            if (status[0][2] != 0 && status[1][1] == status[2][0] && status[2][0] == status[0][2]) {
+                announceWinner(status[1][1]);
+                return;
+            }
+            if(checkDraw(status)) {
+                announceWinner(0);
+            }
+    }
+
+    private boolean checkDraw(int[][] status) {
+        for (int[] rows : status) {
+            for (int cols : rows) {
+                if (cols == 0) {
+                    return false;
+                }
             }
         }
-        //Checks for vertical winning scenarios.
-        for (int col = 0; col < status.length; col++) {
-            if (status[0][col] != 0 && status[0][col] == status[1][col] && status[1][col] == status[2][col]) {
-                announceWinner(status[0][col]);
-            }
-        }
-        //Checks for diagonal winning scenarios.
-        if (status[0][0] != 0 && status[1][1] == status[2][2] && status[2][2] == status[0][0]) {
-            announceWinner(status[1][1]);
-        }
-        //Checks for another diagonal winning scenario.
-        if (status[0][2] != 0 && status[1][1] == status[2][0] && status[2][0] == status[0][2]) {
-            announceWinner(status[1][1]);
-        }
+        return true;
     }
 
     /**

@@ -1,6 +1,11 @@
-import java.awt.Graphics;
-import java.awt.Font;
+import java.awt.*;
 
+/**
+ * @author Sush and Louis
+ * Advanced Programming Topics Period 3
+ * TicTacToe with AI
+ * This class is intended to handle much of the graphics behind the TicTacToe game.
+ */
 class Board {
 
     //Creates a array that stores if the point on the grid is occupied or not
@@ -9,6 +14,7 @@ class Board {
     private DrawingPanel panel = new DrawingPanel(600, 600);
     //Creates the graphics object
     private Graphics g = panel.getGraphics();
+    //Number representing if it is X's or O's turn.
     private int turnNumber;
 
     /**
@@ -16,10 +22,16 @@ class Board {
      * Calls the drawLines method, so that the lines are drawn.
      */
     Board() {
+        panel.setBackground(Color.GREEN);
         drawLines();
     }
 
-    void updateArray(int x, int y) {
+    /**
+     * Updates the array with the correct play the user makes.
+     * @param x X value of the click.
+     * @param y Y value of the click.
+     */
+    void updateTurn(int x, int y) {
         if(boardStatus[x/200][y/200] == 0) {
             if (turnNumber % 2 == 0) {
                 boardStatus[x / 200][y / 200] = 2;
@@ -56,12 +68,34 @@ class Board {
         g.drawLine(0, 400, 600, 400);
     }
 
+    /**
+     * Gets the state of the board containing all the moves.
+     * @return 2 dimensional array of integers representing the state of the board.
+     */
+    int[][] getBoardStatus() {
+        return this.boardStatus;
+    }
+
+    /**
+     *
+
+     /**
+     * Returns the DrawingPanel object for the onClick handler.
+     * @return DrawingPanel object.
+     */
     DrawingPanel getPanel() {
         return this.panel;
     }
 
-    int[][] getBoardStatus() {
-        return this.boardStatus;
+    /**
+     * This method resets the board state, clears the panel and turn count, and draws fresh new lines.
+     * This is for when the user wants to play the game a second time.
+     */
+    void resetBoard() {
+        boardStatus = new int[3][3];
+        panel.clear();
+        drawLines();
+        turnNumber = 0;
     }
 
 }

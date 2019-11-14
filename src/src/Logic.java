@@ -1,4 +1,4 @@
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  * @author Sush and Louis
@@ -28,8 +28,7 @@ public class Logic {
         if(isFirstGame) {
             board = new Board();
         }
-        //On click handler.
-        board.getPanel().onClick(this::handleClick);
+        decideGame(promptGameType());
     }
 
     /**
@@ -42,6 +41,34 @@ public class Logic {
         checkWin();
     }
 
+    private void decideGame(int gameType) {
+        switch (gameType) {
+            case 0:
+                playerVPlayer();
+                break;
+            case 1:
+                playerVDumbAI();
+                break;
+            case 2:
+                playerVBigBrain();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void playerVBigBrain() {
+
+    }
+
+    private void playerVDumbAI() {
+
+    }
+
+    private void playerVPlayer() {
+        //On click handler.
+        board.getPanel().onClick(this::handleClick);
+    }
     /**
      * This method gets the status of the board, then goes through every row and finds a win condition based on if it's
      * in a row. The method then passes the state off to the announceWinner method to print out who has won.
@@ -133,6 +160,13 @@ public class Logic {
     private void resetGame() {
         board.resetBoard();
         new Logic(false);
+    }
+
+    private int promptGameType() {
+        String[] choices = {"Player vs Player", "Player vs Random AI", "Player vs BigBrain™ AI"};
+        return JOptionPane.showOptionDialog(null, board.getPanel(),
+                "What type of game would you like to play?", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE, null, choices, null);
     }
 
 }

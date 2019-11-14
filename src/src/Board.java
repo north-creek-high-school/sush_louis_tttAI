@@ -17,7 +17,7 @@ class Board {
     //Creates the graphics object
     private Graphics g = panel.getGraphics();
     //Number representing if it is X's or O's turn.
-    private int turnNumber;
+    private boolean drawX = true;
 
     /**
      * Constructor called when a new Board object is created.
@@ -35,14 +35,14 @@ class Board {
      */
     void updateTurn(int x, int y) {
         if(boardStatus[x/200][y/200] == 0) {
-            if (turnNumber % 2 == 0) {
+            if (drawX) {
                 boardStatus[x / 200][y / 200] = 2;
                 drawObject((x/200)*200, ((y/200) * 200) + 200);
             } else {
                 boardStatus[x / 200][y / 200] = 1;
             }
             drawObject((x/200)*200, ((y/200) * 200) + 200);
-            turnNumber++;
+            drawX = !drawX;
         }
     }
 
@@ -53,7 +53,7 @@ class Board {
      */
      private void drawObject(int x, int y) {
         g.setFont(new Font("Monospace", Font.PLAIN, 200));
-            if (turnNumber % 2 == 0) {
+            if (drawX) {
                 g.drawString("X", x + 25, y - 10);
             } else {
                 g.drawString("O", x + 25, y - 10);
@@ -97,7 +97,8 @@ class Board {
         boardStatus = new int[3][3];
         panel.clear();
         drawLines();
-        turnNumber = 0;
+        drawX = true;
     }
+
 
 }

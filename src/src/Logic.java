@@ -12,6 +12,8 @@ public class Logic {
     //Board object to handle the graphic aspects of the game.
     private static Board board;
     private int gameType;
+    private AI ai;
+    private int turnNumber;
 
     /**
      * Main method run when the game is started.
@@ -59,11 +61,20 @@ public class Logic {
     }
 
     private void playerVDumbAI() {
-        AI ai = new AI();
-        board.getPanel().onClick(this::handleClick);
+        ai = new AI();
+        board.getPanel().onClick(this::pvAIClick);
+    }
+
+    private void pvAIClick(int x, int y) {
+        board.updateTurn(x, y);
+        turnNumber++;
         Point aiClick = ai.takeRandomTurn(board.getBoardStatus());
-        board.updateTurn(aiClick.x, aiClick.y);
+        if(turnNumber <= 8) {
+            board.updateTurn(aiClick.x, aiClick.y);
+            turnNumber++;
+        }
         checkWin();
+
     }
 
     private void playerVPlayer() {

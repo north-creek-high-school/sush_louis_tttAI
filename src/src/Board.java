@@ -33,7 +33,7 @@ class Board {
      * @param x X value of the click.
      * @param y Y value of the click.
      */
-    void updateTurn(int x, int y) {
+    boolean updateTurn(int x, int y) {
         if(boardStatus[x/200][y/200] == 0) {
             if (drawX) {
                 boardStatus[x / 200][y / 200] = 2;
@@ -43,7 +43,9 @@ class Board {
             }
             drawObject((x/200)*200, ((y/200) * 200) + 200);
             drawX = !drawX;
+            return true;
         }
+        return false;
     }
 
     /**

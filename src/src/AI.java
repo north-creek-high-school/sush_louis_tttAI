@@ -16,4 +16,8 @@ class AI {
 
     }
 
+    void placeRandom(int[][] boardStatus) {
+
+    }
+
 }

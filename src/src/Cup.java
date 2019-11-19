@@ -8,8 +8,8 @@ class Cup {
         moves = new ArrayList<>();
     }
 
-    void addMove() {
-
+    void addMove(int move) {
+        moves.add(move);
     }
 
 }

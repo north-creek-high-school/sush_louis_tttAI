@@ -48,30 +48,29 @@ public class Logic {
                 playerVPlayer();
                 break;
             case 1:
-                playerVDumbAI();
+                playerVLearningAI();
                 break;
             case 2:
-                playerVBigBrain();
+                playerVRecurAI();
                 break;
             default:
                 break;
         }
     }
 
-    private void playerVBigBrain() {
+    /**
+     * TODO
+     */
+    private void playerVRecurAI() {
+
     }
 
-    private void playerVDumbAI() {
-        AI ai = new AI();
-        board.getPanel().onClick(this::handleClick);
-        while(!checkWin()) {
-            if(turnNumber % 2 == 1) {
-                Point aiClick = ai.takeRandomTurn(board.getBoardStatus());
-                board.updateTurn(aiClick.x, aiClick.y);
-                turnNumber++;
-            }
-        }
+    /**
+     * TODO
+     */
+    private void playerVLearningAI() {
     }
+
 
     private void playerVPlayer() {
         //On click handler.
@@ -174,7 +173,7 @@ public class Logic {
     }
 
     private void promptGameType() {
-        String[] choices = {"Player vs Player", "Player vs Random AI", "Player vs BigBrain™ AI"};
+        String[] choices = {"Player vs Player", "Player vs Learning AI", "Player vs GameTree AI"};
         gameType = JOptionPane.showOptionDialog(null, "What type of game would you like to play?",
                 "Prompt", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.PLAIN_MESSAGE, null, choices, null);

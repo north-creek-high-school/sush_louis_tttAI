@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * @author Sush and Louis
@@ -12,7 +11,6 @@ public class Logic {
     //Board object to handle the graphic aspects of the game.
     private static Board board;
     private int gameType;
-    private int turnNumber;
 
     /**
      * Main method run when the game is started.
@@ -36,9 +34,7 @@ public class Logic {
      * @param y Y position on the click.
      */
     private void handleClick(int x, int y) {
-        if(board.updateTurn(x, y)) {
-            turnNumber++;
-        }
+        board.updateTurn(x, y);
         if(gameType == 0) checkWin();
     }
 
@@ -81,38 +77,36 @@ public class Logic {
      * in a row. The method then passes the state off to the announceWinner method to print out who has won.
      * 0 if it's a draw, 1 if X wins, 2 if O wins
      * */
-    private boolean checkWin() {
+    private void checkWin() {
         int[][] status = board.getBoardStatus();
             //Checks for horizontal winning scenarios.
             for (int[] ints : status) {
                 if (ints[0] != 0 && ints[0] == ints[1] && ints[2] == ints[1]) {
                     announceWinner(ints[0]);
-                    return true;
+                    return;
                 }
             }
             //Checks for vertical winning scenarios.
             for (int col = 0; col < status.length; col++) {
                 if (status[0][col] != 0 && status[0][col] == status[1][col] && status[1][col] == status[2][col]) {
                     announceWinner(status[0][col]);
-                    return true;
+                    return;
                 }
             }
             //Checks for diagonal winning scenarios.
             if (status[0][0] != 0 && status[1][1] == status[2][2] && status[2][2] == status[0][0]) {
                 announceWinner(status[1][1]);
-                return true;
+                return;
             }
             //Checks for another diagonal winning scenario.
             if (status[0][2] != 0 && status[1][1] == status[2][0] && status[2][0] == status[0][2]) {
                 announceWinner(status[1][1]);
-                return true;
+                return;
             }
             //Checks for a draw
             if(checkDraw(status)) {
                 announceWinner(0);
-                return true;
             }
-            return false;
     }
 
     /**
@@ -153,9 +147,9 @@ public class Logic {
      * is selected. Otherwise a new window with a new board is opened.
      */
     private void promptGame(String endText) {
-        int s = JOptionPane.showConfirmDialog(null, endText + " " +
-                "Would you like to play again?");
-        if(s != 0) {
+        int result = JOptionPane.showConfirmDialog (null, endText + "\nWould you like to play again?",
+                "Thanks for playing!",JOptionPane.YES_NO_OPTION);
+        if(result != 0) {
             System.exit(0);
         } else {
             //Reset the game here
@@ -167,7 +161,6 @@ public class Logic {
      * Resets the game if the user wants to play again.
      */
     private void resetGame() {
-        turnNumber = 0;
         board.resetBoard();
         promptGameType();
     }

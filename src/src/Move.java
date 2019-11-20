@@ -23,4 +23,12 @@ class Move {
         }
         return 9;
     }
+
+    int getX() {
+        return (this.col/200) * 200;
+    }
+
+    int getY() {
+        return (this.col/200) * 200 + 200;
+    }
 }

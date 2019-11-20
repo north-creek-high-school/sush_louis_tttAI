@@ -10,7 +10,10 @@ public class Logic {
 
     //Board object to handle the graphic aspects of the game.
     private static Board board;
+    //Stores the type of the game as an integer.
     private int gameType;
+    //Integer to keep track of the number of turns completed.
+    private int turnNumber = 1;
 
     /**
      * Main method run when the game is started.
@@ -36,6 +39,7 @@ public class Logic {
     private void handleClick(int x, int y) {
         board.updateTurn(x, y);
         if(gameType == 0) checkWin();
+        turnNumber++;
     }
 
     private void decideGame() {
@@ -65,6 +69,13 @@ public class Logic {
      * TODO
      */
     private void playerVLearningAI() {
+        AI ai = new AI();
+        while(!checkWin()) {
+            if(turnNumber % 2 == 0) {
+                Move turn = ai.takeTurn(board.getBoardStatus());
+                board.updateTurn(turn.getX(), turn.getY());
+            }
+        }
     }
 
 
@@ -77,36 +88,38 @@ public class Logic {
      * in a row. The method then passes the state off to the announceWinner method to print out who has won.
      * 0 if it's a draw, 1 if X wins, 2 if O wins
      * */
-    private void checkWin() {
+    private boolean checkWin() {
         int[][] status = board.getBoardStatus();
             //Checks for horizontal winning scenarios.
             for (int[] ints : status) {
                 if (ints[0] != 0 && ints[0] == ints[1] && ints[2] == ints[1]) {
                     announceWinner(ints[0]);
-                    return;
+                    return true;
                 }
             }
             //Checks for vertical winning scenarios.
             for (int col = 0; col < status.length; col++) {
                 if (status[0][col] != 0 && status[0][col] == status[1][col] && status[1][col] == status[2][col]) {
                     announceWinner(status[0][col]);
-                    return;
+                    return true;
                 }
             }
             //Checks for diagonal winning scenarios.
             if (status[0][0] != 0 && status[1][1] == status[2][2] && status[2][2] == status[0][0]) {
                 announceWinner(status[1][1]);
-                return;
+                return true;
             }
             //Checks for another diagonal winning scenario.
             if (status[0][2] != 0 && status[1][1] == status[2][0] && status[2][0] == status[0][2]) {
                 announceWinner(status[1][1]);
-                return;
+                return true;
             }
             //Checks for a draw
             if(checkDraw(status)) {
                 announceWinner(0);
+                return true;
             }
+            return false;
     }
 
     /**
@@ -162,6 +175,7 @@ public class Logic {
      */
     private void resetGame() {
         board.resetBoard();
+        turnNumber = 1;
         promptGameType();
     }
 

@@ -12,9 +12,10 @@ class AI {
         return this.map;
     }
 
-    void takeTurn(int[][] boardStatus) {
+    Move takeTurn(int[][] boardStatus) {
         Cup currentCup = map.get(boardStatus);
         Move move = currentCup.getBestMove();
+        return move;
         //TODO add it here
 
     }

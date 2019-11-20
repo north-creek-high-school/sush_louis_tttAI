@@ -4,15 +4,16 @@ class Cup {
 
     private ArrayList<Move> moves;
 
-    Cup() {
+    Cup(int[][] boardStatus) {
         moves = new ArrayList<>();
+        addPossibleMoves(boardStatus);
     }
 
     void addMove(Move userChoice) {
         moves.add(userChoice);
     }
 
-    private void addPossibleMoves() {
+    private void addPossibleMoves(int[][] boardStatus) {
 
     }
 

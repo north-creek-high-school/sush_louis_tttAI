@@ -10,7 +10,9 @@ public class Logic {
 
     //Board object to handle the graphic aspects of the game.
     private static Board board;
+    //Stores the type of the game as an integer.
     private int gameType;
+    //Integer to keep track of the number of turns completed.
     private int turnNumber = 1;
 
     /**
@@ -70,7 +72,8 @@ public class Logic {
         AI ai = new AI();
         while(!checkWin()) {
             if(turnNumber % 2 == 0) {
-                ai.takeTurn(board.getBoardStatus());
+                Move turn = ai.takeTurn(board.getBoardStatus());
+                board.updateTurn(turn.getX(), turn.getY());
             }
         }
     }

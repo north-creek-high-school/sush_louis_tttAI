@@ -13,6 +13,9 @@ class AI {
     }
 
     void takeTurn(int[][] boardStatus) {
+        Cup currentCup = map.get(boardStatus);
+        Move move = currentCup.getBestMove();
+        //TODO add it here
 
     }
 

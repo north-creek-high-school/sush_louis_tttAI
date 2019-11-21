@@ -1,3 +1,4 @@
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -23,22 +24,22 @@ class AI {
      * @return The Move the AI decides to make.
      */
     Move takeTurn(int[][] boardStatus) {
+        boardStatus = boardStatus.clone();
         Cup currentCup = map.get(boardStatus);
         //If there is no cup in the location, a new one is made.
         if(currentCup == null) {
             map.put(boardStatus, new Cup(boardStatus));
+            //TODO only one cup in map, change this!!!.
             currentCup = map.get(boardStatus);
         }
+
+
         //Move is added to the cup.
         Move move = currentCup.getBestMove();
         currentCup.addMove(move);
         //Cup is added back to the Map.
         map.put(boardStatus, currentCup);
         return move;
-    }
-
-    void placeRandom(int[][] boardStatus) {
-
     }
 
 }

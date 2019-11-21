@@ -31,6 +31,16 @@ class Move {
      * @return Corresponding Y value.
      */
     int getY() {
-        return (this.col/200) * 200 + 200;
+        return (this.row/200) * 200 + 200;
+    }
+
+    public String toString() {
+        if(row == 0) {
+            return col + 1 + "";
+        } else if(row == 1) {
+            return col + 4 + "";
+        } else {
+            return col + 7 + "";
+        }
     }
 }

@@ -70,6 +70,7 @@ public class Logic {
      */
     private void playerVLearningAI() {
         AI ai = new AI();
+        board.getPanel().onClick(this::handleClick);
         while(!checkWin()) {
             if(turnNumber % 2 == 0) {
                 Move turn = ai.takeTurn(board.getBoardStatus());

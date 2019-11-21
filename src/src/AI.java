@@ -6,6 +6,7 @@ class AI {
 
     AI() {
         map = new HashMap<>();
+        fillMap();
     }
 
     HashMap<int[][], Cup> getMap() {
@@ -17,6 +18,10 @@ class AI {
         Move move = currentCup.getBestMove();
         return move;
         //TODO add it here
+
+    }
+
+    private void fillMap() {
 
     }
 

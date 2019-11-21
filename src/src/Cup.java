@@ -14,7 +14,13 @@ class Cup {
     }
 
     private void addPossibleMoves(int[][] boardStatus) {
-
+        for(int rows = 0; rows < boardStatus.length; rows++) {
+            for(int cols = 0; cols < boardStatus[rows].length; cols++) {
+                if(boardStatus[rows][cols] == 0) {
+                    moves.add(new Move(rows, cols));
+                }
+            }
+        }
     }
 
     Move getBestMove() {

@@ -1,26 +1,36 @@
+/**
+ * This class is a way to represent a move as more than just 2 coordinates, using a form of abstraction.
+ */
 class Move {
 
+    //Column of the move placement.
     private int col;
+    //Row of the move placement.
     private int row;
 
+    /**
+     * Creates a new move to be added to the map, to be used for AI learning.
+     * @param row Row of the move placement.
+     * @param col Column of the move placement.
+     */
     Move(int row, int col) {
         this.row = row;
         this.col = col;
     }
 
-    int getMove() {
-        if(row == 0) {
-            if(col == 0) return 1;
-            if(col == 1) return 2;
-            if(col == 3) return 3;
-        } else if(row == 1) {
-            if(col == 0) return 4;
-            if(col == 1) return 5;
-            if(col == 2) return 6;
-        } else {
-            if(col == 0) return 7;
-            if(col == 1) return 8;
-        }
-        return 9;
+    /**
+     * Gets an X value on the board to place the move.
+     * @return Corresponding X value
+     */
+    int getX() {
+        return (this.col/200) * 200;
+    }
+
+    /**
+     * Gets a Y value on the board to place the move.
+     * @return Corresponding Y value.
+     */
+    int getY() {
+        return (this.col/200) * 200 + 200;
     }
 }

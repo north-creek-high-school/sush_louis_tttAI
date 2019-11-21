@@ -10,7 +10,9 @@ public class Logic {
 
     //Board object to handle the graphic aspects of the game.
     private static Board board;
+    //Stores the type of the game as an integer.
     private int gameType;
+    //Integer to keep track of the number of turns completed.
     private int turnNumber = 1;
 
     /**
@@ -35,13 +37,14 @@ public class Logic {
      * @param y Y position on the click.
      */
     private void handleClick(int x, int y) {
-        if(board.updateTurn(x, y)) {
-            System.out.println(turnNumber);
-            turnNumber++;
-        }
+        board.updateTurn(x, y);
         if(gameType == 0) checkWin();
+        turnNumber++;
     }
 
+    /**
+     * Uses a series of switch statements to determine which game to initiate.
+     */
     private void decideGame() {
         switch (gameType) {
             case 0:
@@ -66,20 +69,31 @@ public class Logic {
     }
 
     /**
-     * TODO
+     * This method provides functionality for player vs learning AI.
+     * TODO in progress
      */
     private void playerVLearningAI() {
+        AI ai = new AI();
         board.getPanel().onClick(this::handleClick);
         while(!checkWin()) {
-
+            if(turnNumber % 2 == 0) {
+                Move turn = ai.takeTurn(board.getBoardStatus());
+                turnNumber++;
+                board.updateTurn(turn.getX(), turn.getY());
+            }
         }
     }
 
-
+    /**
+     * Initiates a player vs player game.
+     * For now, it just has the onClick handler, but more functionality might be added.
+     * One such functionality could be learning from a player v player game.
+     */
     private void playerVPlayer() {
         //On click handler.
         board.getPanel().onClick(this::handleClick);
     }
+
     /**
      * This method gets the status of the board, then goes through every row and finds a win condition based on if it's
      * in a row. The method then passes the state off to the announceWinner method to print out who has won.
@@ -176,6 +190,9 @@ public class Logic {
         promptGameType();
     }
 
+    /**
+     * Prompts the user for the type of game to play.
+     */
     private void promptGameType() {
         String[] choices = {"Player vs Player", "Player vs Learning AI", "Player vs GameTree AI"};
         gameType = JOptionPane.showOptionDialog(null, "What type of game would you like to play?",

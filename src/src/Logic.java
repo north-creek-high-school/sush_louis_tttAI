@@ -77,6 +77,7 @@ public class Logic {
         board.getPanel().onClick(this::handleClick);
         while(!checkWin()) {
             if(turnNumber % 2 == 0) {
+                System.out.println("AI's turn");
                 Move turn = ai.takeTurn(board.getBoardStatus());
                 turnNumber++;
                 board.updateTurn(turn.getX(), turn.getY());

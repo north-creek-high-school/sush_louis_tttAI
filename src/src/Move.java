@@ -22,16 +22,16 @@ class Move {
      * Gets an X value on the board to place the move.
      * @return Corresponding X value
      */
-    int getX() {
-        return (this.col/200) * 200;
+    int getCol() {
+        return col;
     }
 
     /**
      * Gets a Y value on the board to place the move.
      * @return Corresponding Y value.
      */
-    int getY() {
-        return (this.row/200) * 200 + 200;
+    int getRow() {
+        return row;
     }
 
     public String toString() {

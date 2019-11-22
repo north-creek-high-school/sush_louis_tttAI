@@ -28,10 +28,8 @@ class AI {
         //If there is no cup in the location, a new one is made.
         if(currentCup == null) {
             map.put(boardStatus, new Cup(boardStatus));
-            //TODO only one cup in map, change this!!!.
             currentCup = map.get(boardStatus);
         }
-
 
         //Move is added to the cup.
         Move move = currentCup.getBestMove();

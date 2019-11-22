@@ -28,31 +28,26 @@ class Board {
         drawLines();
     }
 
-    /**
-     * Updates the array with the correct play the user makes.
-     * @param x X value of the click.
-     * @param y Y value of the click.
-     */
-    boolean updateTurn(int x, int y) {
-        if(boardStatus[x/200][y/200] == 0) {
+    boolean updateTurn(int col, int row) {
+
+        if(boardStatus[col][row] == 0) {
             if (drawX) {
-                boardStatus[x / 200][y / 200] = 1;
+                boardStatus[col][row] = 1;
             } else {
-                boardStatus[x / 200][y / 200] = 2;
+                boardStatus[col][row] = 2;
             }
-            drawObject((x/200)*200, ((y/200) * 200) + 200);
+            drawObject(col, row);
             drawX = !drawX;
             return true;
         }
         return false;
+
     }
 
-    /**
-     *
-     * @param x X value of where to draw object
-     * @param y Y value of where to draw object
-     */
-     private void drawObject(int x, int y) {
+
+     private void drawObject(int col, int row) {
+         int x = col * 200;
+         int y = row * 200 + 200;
         g.setFont(new Font("Monospace", Font.PLAIN, 200));
             if (drawX) {
                 g.drawString("X", x + 25, y - 10);

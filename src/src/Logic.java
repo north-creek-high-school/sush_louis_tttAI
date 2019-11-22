@@ -31,6 +31,7 @@ public class Logic {
      */
     private Logic() {
         promptGameType();
+        globalTrainingData = new HashMap<>();
     }
 
     /**
@@ -39,8 +40,18 @@ public class Logic {
      * @param y Y position on the click.
      */
     private void handleClick(int x, int y) {
-        if(board.updateTurn(x, y)) turnNumber++;
+        int[] loc = convertToRowCol(x, y);
+        if(board.updateTurn(loc[0], loc[1])) turnNumber++;
         if(gameType == 0) checkWin();
+    }
+
+    private int[] convertToRowCol(int x, int y) {
+        //Col as first value
+        //Row as second value
+        int[] place = new int[2];
+        place[0] = x/200;
+        place[1] = y/200;
+        return place;
     }
 
     /**
@@ -71,7 +82,6 @@ public class Logic {
 
     /**
      * This method provides functionality for player vs learning AI.
-     * TODO in progress
      */
     private void playerVLearningAI() {
         AI ai = new AI();
@@ -79,18 +89,18 @@ public class Logic {
         while(!checkWin()) {
             if(turnNumber % 2 == 0) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(10);
                 } catch (Exception ignored) {
                 }
                 Move turn = ai.takeTurn(board.getBoardStatus());
-                board.updateTurn(turn.getX(), turn.getY());
+                board.updateTurn(turn.getCol(), turn.getRow());
                 turnNumber++;
+
             }
         }
         updateTrainingData(ai.getMap());
     }
 
-    //TODO
     private void updateTrainingData(HashMap<int[][], Cup> map) {
 
     }

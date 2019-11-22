@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
 
 /**
  * @author Sush and Louis
@@ -15,6 +15,7 @@ public class Logic {
     private int gameType;
     //Integer to keep track of the number of turns completed.
     private int turnNumber = 1;
+    private HashMap<int[][], Cup> globalTrainingData;
 
     /**
      * Main method run when the game is started.
@@ -77,12 +78,21 @@ public class Logic {
         board.getPanel().onClick(this::handleClick);
         while(!checkWin()) {
             if(turnNumber % 2 == 0) {
-                System.out.println("AI's turn");
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ignored) {
+                }
                 Move turn = ai.takeTurn(board.getBoardStatus());
-                turnNumber++;
                 board.updateTurn(turn.getX(), turn.getY());
+                turnNumber++;
             }
         }
+        updateTrainingData(ai.getMap());
+    }
+
+    //TODO
+    private void updateTrainingData(HashMap<int[][], Cup> map) {
+
     }
 
     /**
@@ -159,9 +169,9 @@ public class Logic {
      */
     private void announceWinner(int winner) {
         if (winner == 1) {
-            promptGame("O has won the game!");
-        } else if (winner == 2) {
             promptGame("X has won the game!");
+        } else if (winner == 2) {
+            promptGame("O has won the game!");
         } else {
             promptGame("This game is a draw!");
         }

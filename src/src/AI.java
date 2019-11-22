@@ -1,4 +1,3 @@
-import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -40,6 +39,10 @@ class AI {
         //Cup is added back to the Map.
         map.put(boardStatus, currentCup);
         return move;
+    }
+
+    HashMap<int[][], Cup> getMap() {
+        return map;
     }
 
 }

@@ -48,6 +48,18 @@ class Cup {
      * @return The Move the AI can make.
      */
     Move getBestMove() {
-        return moves.get((int) (Math.random() * moves.size()));
+        /*
+        for(Move move: moves) {
+            System.out.println(move.toString());
+        }
+        System.out.println("Done with ArrayList");
+         */
+        Move m = moves.get((int) (Math.random() * moves.size()));
+        System.out.println(m.toString());
+        return m;
+    }
+
+    public String toString() {
+        return moves.toString();
     }
 }

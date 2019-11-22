@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Sush and Louis
@@ -37,9 +38,8 @@ public class Logic {
      * @param y Y position on the click.
      */
     private void handleClick(int x, int y) {
-        board.updateTurn(x, y);
+        if(board.updateTurn(x, y)) turnNumber++;
         if(gameType == 0) checkWin();
-        turnNumber++;
     }
 
     /**
@@ -77,6 +77,7 @@ public class Logic {
         board.getPanel().onClick(this::handleClick);
         while(!checkWin()) {
             if(turnNumber % 2 == 0) {
+                System.out.println("AI's turn");
                 Move turn = ai.takeTurn(board.getBoardStatus());
                 turnNumber++;
                 board.updateTurn(turn.getX(), turn.getY());

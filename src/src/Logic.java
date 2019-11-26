@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * @author Sush Mullur
@@ -103,7 +104,12 @@ public class Logic {
     }
 
     private void updateTrainingData(HashMap<int[][], Cup> map) {
-
+        Set set = map.keySet();
+        for(Object boardStatus: set) {
+            Cup c = map.get(boardStatus);
+            Cup d = this.globalTrainingData.get(boardStatus);
+            //map.put(boardStatus, d.mergeCup(c));
+        }
     }
 
     /**

@@ -56,4 +56,15 @@ class Cup {
     public String toString() {
         return moves.toString();
     }
+
+    void mergeCup(Cup other) {
+        ArrayList otherList = other.getList();
+        for(Object m: otherList) {
+            this.moves.add((Move) m);
+        }
+    }
+
+    ArrayList getList() {
+        return this.getList();
+    }
 }

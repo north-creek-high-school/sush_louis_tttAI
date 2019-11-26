@@ -29,12 +29,18 @@ class Board {
     }
 
     boolean updateTurn(int col, int row) {
-
-        if(boardStatus[col][row] == 0) {
+        for(int[] rows: boardStatus) {
+            for(int status: rows) {
+                System.out.print(status + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("___");
+        if(boardStatus[row][col] == 0) {
             if (drawX) {
-                boardStatus[col][row] = 1;
+                boardStatus[row][col] = 1;
             } else {
-                boardStatus[col][row] = 2;
+                boardStatus[row][col] = 2;
             }
             drawObject(col, row);
             drawX = !drawX;

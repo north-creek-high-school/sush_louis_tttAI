@@ -2,7 +2,8 @@ import javax.swing.*;
 import java.util.HashMap;
 
 /**
- * @author Sush and Louis
+ * @author Sush Mullur
+ * @author Louis Cai
  * Advanced Programming Topics Period 3
  * TicTacToe with AI
  * This class is intended to handle much of the logic behind the TicTacToe game.

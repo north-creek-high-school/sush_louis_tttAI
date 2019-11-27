@@ -49,11 +49,22 @@ class Cup {
      */
     Move getBestMove() {
         Move m = moves.get((int) (Math.random() * moves.size()));
-        System.out.println("AI chooses: " + m.toString());
+        //System.out.println("AI chooses: " + m.toString());
         return m;
     }
 
     public String toString() {
         return moves.toString();
+    }
+
+    void mergeCup(Cup other) {
+        ArrayList otherList = other.getList();
+        for(Object m: otherList) {
+            this.moves.add((Move) m);
+        }
+    }
+
+    ArrayList getList() {
+        return this.getList();
     }
 }

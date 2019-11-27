@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
- * @author Sush and Louis
+ * @author Sush Mullur
+ * @author Louis Cai
  * Advanced Programming Topics Period 3
  * TicTacToe with AI
  * This class is intended to handle much of the logic behind the TicTacToe game.
@@ -102,7 +104,12 @@ public class Logic {
     }
 
     private void updateTrainingData(HashMap<int[][], Cup> map) {
-
+        Set set = map.keySet();
+        for(Object boardStatus: set) {
+            Cup c = map.get(boardStatus);
+            Cup d = this.globalTrainingData.get(boardStatus);
+            //map.put(boardStatus, d.mergeCup(c));
+        }
     }
 
     /**

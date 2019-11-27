@@ -104,11 +104,14 @@ public class Logic {
     }
 
     private void updateTrainingData(HashMap<int[][], Cup> map) {
-        Set set = map.keySet();
-        for(Object boardStatus: set) {
-            Cup c = map.get(boardStatus);
-            Cup d = this.globalTrainingData.get(boardStatus);
-            //map.put(boardStatus, d.mergeCup(c));
+        Set mapKeys = map.keySet();
+        for(Object board: mapKeys) {
+            Cup c = map.get(board);
+            if(globalTrainingData.get(board) != null) {
+                Cup d = globalTrainingData.get(board);
+                Cup e = c.mergeCup(d);
+                map.put((int[][]) board, e);
+            }
         }
     }
 

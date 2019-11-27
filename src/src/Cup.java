@@ -48,23 +48,23 @@ class Cup {
      * @return The Move the AI can make.
      */
     Move getBestMove() {
-        Move m = moves.get((int) (Math.random() * moves.size()));
         //System.out.println("AI chooses: " + m.toString());
-        return m;
+        return moves.get((int) (Math.random() * moves.size()));
     }
 
     public String toString() {
         return moves.toString();
     }
 
-    void mergeCup(Cup other) {
+    Cup mergeCup(Cup other) {
         ArrayList otherList = other.getList();
         for(Object m: otherList) {
             this.moves.add((Move) m);
         }
+        return this;
     }
 
-    ArrayList getList() {
+    private ArrayList getList() {
         return this.getList();
     }
 }
